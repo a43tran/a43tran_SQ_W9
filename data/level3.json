@@ -1,0 +1,31 @@
+{
+  "targetScore": 12,
+  "cards": [
+    { "value": 1,  "label": "A",  "suit": "♠" },
+    { "value": 2,  "label": "2",  "suit": "♠" },
+    { "value": 3,  "label": "3",  "suit": "♠" },
+    { "value": 4,  "label": "4",  "suit": "♠" },
+    { "value": 5,  "label": "5",  "suit": "♠" },
+    { "value": 6,  "label": "6",  "suit": "♠" },
+    { "value": 7,  "label": "7",  "suit": "♠" },
+    { "value": 8,  "label": "8",  "suit": "♠" },
+    { "value": 9,  "label": "9",  "suit": "♠" },
+    { "value": 10, "label": "10", "suit": "♠" },
+    { "value": 11, "label": "J",  "suit": "♠" },
+    { "value": 12, "label": "Q",  "suit": "♠" },
+    { "value": 13, "label": "K",  "suit": "♠" },
+    { "value": 1,  "label": "A",  "suit": "♥" },
+    { "value": 2,  "label": "2",  "suit": "♥" },
+    { "value": 3,  "label": "3",  "suit": "♥" },
+    { "value": 4,  "label": "4",  "suit": "♥" },
+    { "value": 5,  "label": "5",  "suit": "♥" },
+    { "value": 6,  "label": "6",  "suit": "♥" },
+    { "value": 7,  "label": "7",  "suit": "♥" },
+    { "value": 8,  "label": "8",  "suit": "♥" },
+    { "value": 9,  "label": "9",  "suit": "♥" },
+    { "value": 10, "label": "10", "suit": "♥" },
+    { "value": 11, "label": "J",  "suit": "♥" },
+    { "value": 12, "label": "Q",  "suit": "♥" },
+    { "value": 13, "label": "K",  "suit": "♥" }
+  ]
+}
