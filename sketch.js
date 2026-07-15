@@ -1,33 +1,6 @@
-// ============================================================
-// Week 9 Example 3 — Higher or Lower
-// ============================================================
-// A card guessing game across 3 JSON-driven levels.
-// A card is shown face up. Guess whether the next card in
-// the deck is higher or lower. Reach the target score to
-// advance to the next level. Guess wrong and it's game over.
-//
-// This example has NO debug panel.
-// Your job in the side quest is to add one.
-//
-// FILE STRUCTURE:
-//   sketch.js        — all game logic
-//   data/level1.json — 8 cards, target score 5
-//   data/level2.json — 13 cards, target score 8
-//   data/level3.json — 26 cards (2 suits), target score 12
-//
-// WHAT TO ADD (side quest):
-//   - A debug panel toggled with D
-//   - At least 3 keyboard shortcuts for jumping between
-//     levels and screens without playing through
-//   - Display the shortcuts in the debug panel so you
-//     don't have to remember them
-// ============================================================
 
 let debugMode = false;
 
-// ------------------------------------------------------------
-// GAME STATES
-// ------------------------------------------------------------
 const STATE_START = "start";
 const STATE_PLAY = "play";
 const STATE_WIN = "win";
@@ -37,30 +10,11 @@ let gameState = STATE_START;
 let currentLevel = 1;
 const MAX_LEVELS = 3;
 
-// ------------------------------------------------------------
-// CARD LAYOUT
-// ------------------------------------------------------------
 const CARD_W = 160;
 const CARD_H = 220;
 
-// ------------------------------------------------------------
-// LEVEL DATA
-// All three levels loaded in preload() and stored by number.
-// levelData[1], levelData[2], levelData[3]
-// ------------------------------------------------------------
 let levelData = {};
 
-// ------------------------------------------------------------
-// GAME DATA
-// deck        — shuffled array of card objects for this level
-// deckIndex   — which card in the deck is currently shown
-// currentCard — the card currently face up
-// nextCard    — the card about to be revealed
-// score       — correct guesses this level
-// targetScore — guesses needed to win this level (from JSON)
-// result      — "correct", "wrong", or "" — shown briefly after guess
-// resultTimer — counts down to clear the result message
-// ------------------------------------------------------------
 let deck = [];
 let deckIndex = 0;
 let currentCard = null;
@@ -71,37 +25,23 @@ let totalScore = 0;
 
 let result = "";
 let resultTimer = 0;
-const RESULT_FRAMES = 45; // how long to show correct/wrong message
+const RESULT_FRAMES = 45; 
 
-// ------------------------------------------------------------
-// BUTTONS
-// Higher and Lower buttons — built in loadLevel() and
-// checked in mousePressed().
-// ------------------------------------------------------------
 let btnHigher = { x: 0, y: 0, w: 140, h: 50, label: "HIGHER ▲" };
 let btnLower = { x: 0, y: 0, w: 140, h: 50, label: "LOWER  ▼" };
 
-// ============================================================
-// preload()
-// Loads all three level JSON files before the sketch starts.
-// ============================================================
+
 function preload() {
   levelData[1] = loadJSON("data/level1.json");
   levelData[2] = loadJSON("data/level2.json");
   levelData[3] = loadJSON("data/level3.json");
 }
 
-// ============================================================
-// setup()
-// ============================================================
 function setup() {
   createCanvas(600, 500);
   textFont("monospace");
 }
 
-// ============================================================
-// draw()
-// ============================================================
 function draw() {
   background(20, 20, 35);
 
@@ -120,11 +60,6 @@ function draw() {
   if (debugMode) drawDebugPanel();
 }
 
-// ------------------------------------------------------------
-// loadLevel(num)
-// Reads level JSON, shuffles the deck, sets up buttons,
-// and resets per-level tracking.
-// ------------------------------------------------------------
 function loadLevel(num) {
   currentLevel = num;
   let data = levelData[num];
@@ -166,14 +101,6 @@ function loadLevel(num) {
   btnLower.y = btnY;
 }
 
-// ------------------------------------------------------------
-// updateResult()
-// Counts down the result display timer each frame.
-// When it reaches 0 the result message clears.
-// If the result was "wrong" the game ends.
-// If the result was "correct" and score reached target,
-// advance to the next level or win.
-// ------------------------------------------------------------
 function updateResult() {
   if (resultTimer <= 0) return;
 
@@ -211,12 +138,6 @@ function updateResult() {
   }
 }
 
-// ------------------------------------------------------------
-// guess(direction)
-// Called when the player clicks Higher or Lower.
-// Compares currentCard and nextCard values.
-// Sets result and starts the result timer.
-// ------------------------------------------------------------
 function guess(direction) {
   if (!nextCard || resultTimer > 0) return;
 
@@ -240,15 +161,6 @@ function guess(direction) {
   }
 }
 
-// ============================================================
-// DRAW FUNCTIONS
-// ============================================================
-
-// ------------------------------------------------------------
-// drawGame()
-// Draws the current card, the hidden next card, buttons,
-// and the result message.
-// ------------------------------------------------------------
 function drawGame() {
   let cardX = (width - CARD_W) / 2;
   let cardY = 120;
@@ -285,13 +197,6 @@ function drawGame() {
   }
 }
 
-// ------------------------------------------------------------
-// drawCard(card, x, y, faceUp)
-// Draws a single playing card.
-// If faceUp is true, shows the card's label and suit.
-// If faceUp is false, draws the card back.
-// card can be null for a face-down card.
-// ------------------------------------------------------------
 function drawCard(card, x, y, faceUp) {
   push();
 
@@ -350,10 +255,6 @@ function drawCard(card, x, y, faceUp) {
   pop();
 }
 
-// ------------------------------------------------------------
-// drawButton(btn)
-// Draws a clickable button with a hover highlight.
-// ------------------------------------------------------------
 function drawButton(btn) {
   let hover = isMouseOverButton(btn);
 
@@ -371,10 +272,6 @@ function drawButton(btn) {
   pop();
 }
 
-// ------------------------------------------------------------
-// drawHUD()
-// Shows level, score progress, and target score.
-// ------------------------------------------------------------
 function drawHUD() {
   noStroke();
   fill(160);
@@ -402,9 +299,6 @@ function drawHUD() {
   rect(barX, barY, fillW, barH, 4);
 }
 
-// ------------------------------------------------------------
-// drawStartScreen()
-// ------------------------------------------------------------
 function drawStartScreen() {
   fill(255);
   textAlign(CENTER);
@@ -431,9 +325,6 @@ function drawStartScreen() {
   text("Click to start", width / 2, height / 2 + 80);
 }
 
-// ------------------------------------------------------------
-// drawWinScreen()
-// ------------------------------------------------------------
 function drawWinScreen() {
   background(20, 20, 35);
 
@@ -455,9 +346,6 @@ function drawWinScreen() {
   text("Click to play again", width / 2, height / 2 + 75);
 }
 
-// ------------------------------------------------------------
-// drawGameOver()
-// ------------------------------------------------------------
 function drawGameOver() {
   background(20, 20, 35);
 
@@ -514,14 +402,6 @@ function drawDebugPanel() {
   }
 }
 
-// ============================================================
-// INPUT
-// ============================================================
-
-// ------------------------------------------------------------
-// mousePressed()
-// Handles clicks on all screens and buttons.
-// ------------------------------------------------------------
 function mousePressed() {
   if (gameState === STATE_START) {
     totalScore = 0;
@@ -542,14 +422,6 @@ function mousePressed() {
   }
 }
 
-// ------------------------------------------------------------
-// keyPressed()
-// No debug shortcuts yet — add them here in the side quest!
-//
-// Hint: use key === "d" || key === "D" to toggle a debug panel.
-// Use key === "1", "2", "3" to jump between levels.
-// Use key === "s" or "w" to jump to start or win screens.
-// ------------------------------------------------------------
 function keyPressed() {
   if (key === "d" || key === "D") {
     debugMode = !debugMode;
@@ -585,10 +457,6 @@ function keyPressed() {
   }
 }
 
-// ------------------------------------------------------------
-// isMouseOverButton(btn)
-// Returns true if the mouse is inside the button rectangle.
-// ------------------------------------------------------------
 function isMouseOverButton(btn) {
   return (
     mouseX > btn.x &&
