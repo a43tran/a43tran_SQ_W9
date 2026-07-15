@@ -429,11 +429,6 @@ function drawStartScreen() {
   fill(255);
   textSize(16);
   text("Click to start", width / 2, height / 2 + 80);
-
-  // Hint for students — no debug panel yet
-  fill(60);
-  textSize(11);
-  text("No debug panel yet — that's your job!", width / 2, height - 20);
 }
 
 // ------------------------------------------------------------
@@ -489,17 +484,18 @@ function drawDebugPanel() {
   noStroke();
   rect(0, height - 80, width, 80);
 
-  fill(255, 220, 50);
+  fill(0, 234, 255);
   textSize(11);
   textAlign(LEFT);
   text("DEBUG MODE (D to close)", 12, height - 62);
 
   let buttons = [
-    { label: "S: Start", x: 12 },
-    { label: "1: Level 1", x: 100 },
-    { label: "2: Level 2", x: 200 },
-    { label: "3: Level 3", x: 300 },
-    { label: "W: Win", x: 400 },
+    { label: "S: Start", x: 10 },
+    { label: "1: Level 1", x: 108 },
+    { label: "2: Level 2", x: 206 },
+    { label: "3: Level 3", x: 304 },
+    { label: "W: Win", x: 402 },
+    { label: "O: Game Over", x: 500}
   ];
 
   for (let i = 0; i < buttons.length; i++) {
@@ -512,7 +508,7 @@ function drawDebugPanel() {
 
     fill(200);
     noStroke();
-    textSize(12);
+    textSize(10);
     textAlign(LEFT);
     text(b.label, b.x + 8, height - 28);
   }
