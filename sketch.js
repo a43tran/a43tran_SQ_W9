@@ -23,6 +23,8 @@
 //     don't have to remember them
 // ============================================================
 
+let debugMode = false;
+
 // ------------------------------------------------------------
 // GAME STATES
 // ------------------------------------------------------------
@@ -114,6 +116,8 @@ function draw() {
   } else if (gameState === STATE_OVER) {
     drawGameOver();
   }
+
+  if (debugMode) drawDebugPanel();
 }
 
 // ------------------------------------------------------------
@@ -480,6 +484,40 @@ function drawGameOver() {
   text("Click to try again", width / 2, height / 2 + 40);
 }
 
+function drawDebugPanel() {
+  fill(0, 0, 0, 200);
+  noStroke();
+  rect(0, height - 80, width, 80);
+
+  fill(255, 220, 50);
+  textSize(11);
+  textAlign(LEFT);
+  text("DEBUG MODE (D to close)", 12, height - 62);
+
+  let buttons = [
+    { label: "S: Start", x: 12 },
+    { label: "1: Level 1", x: 100 },
+    { label: "2: Level 2", x: 200 },
+    { label: "3: Level 3", x: 300 },
+    { label: "W: Win", x: 400 },
+  ];
+
+  for (let i = 0; i < buttons.length; i++) {
+    let b = buttons[i];
+
+    fill(60, 60, 90);
+    stroke(100, 100, 140);
+    strokeWeight(1);
+    rect(b.x, height - 50, 88, 34, 4);
+
+    fill(200);
+    noStroke();
+    textSize(12);
+    textAlign(LEFT);
+    text(b.label, b.x + 8, height - 28);
+  }
+}
+
 // ============================================================
 // INPUT
 // ============================================================
@@ -517,7 +555,38 @@ function mousePressed() {
 // Use key === "s" or "w" to jump to start or win screens.
 // ------------------------------------------------------------
 function keyPressed() {
-  // YOUR DEBUG CODE GOES HERE
+  if (key === "d" || key === "D") {
+    debugMode = !debugMode;
+    return;
+  }
+
+  if (key === "s" || key === "S") {
+    gameState = STATE_START;
+    return;
+  }
+
+  if (key === "w" || key === "W") {
+    gameState = STATE_WIN;
+    return;
+  }
+
+  if (key === "o" || key === "O") {
+    gameState = STATE_OVER;
+    return;
+  }
+
+  if (key === "1") {
+    loadLevel(1);
+    gameState = STATE_PLAY;
+  }
+  if (key === "2") {
+    loadLevel(2);
+    gameState = STATE_PLAY;
+  }
+  if (key === "3") {
+    loadLevel(3);
+    gameState = STATE_PLAY;
+  }
 }
 
 // ------------------------------------------------------------
